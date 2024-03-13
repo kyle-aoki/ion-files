@@ -1,0 +1,97 @@
+interface UserApi
+docs https://lmao.com
+
+enum Season {
+  SPRING
+  SUMMER
+  FALL
+  WINTER
+}
+
+struct Location {
+  street string
+  zipcode string
+}
+
+struct House {
+  location Location
+  squareFootage int
+  users string list
+}
+
+struct UserLite {
+  id int
+  username string
+}
+
+struct User {
+  username string
+  password string
+  dateOfBirth date optional
+  house House optional
+}
+
+function Temp {
+  input {}
+  outcome {}
+  output {}
+}
+
+function CreateUser {
+  input {
+    username string
+    password string
+  }
+  outcome {
+    OK
+    USERNAME_OR_PASSWORD_TOO_LONG
+    USER_ALREADY_EXISTS
+    PASSWORD_TOO_SHORT
+    PASSWORD_INVALID
+  }
+  output {
+    id int
+    username string
+  }
+}
+
+function FindUsers {
+  input {
+    page int
+    size int
+  }
+  outcome {
+    OK
+  }
+  output {
+    users User list
+  }
+}
+
+function CreateGroup {
+  input {
+    groupName string
+    reasonCode string optional
+  }
+  outcome {
+    OK
+    GROUP_ALREADY_EXISTS
+  }
+  output {
+  }
+}
+
+function EnrollUserInGroup {
+  input {
+    targetUserUsername string
+    targetGroup string
+    basic string
+  }
+  outcome {
+    OK
+    FAILURE
+  }
+  output {
+    errorMessage string optional
+  }
+}
